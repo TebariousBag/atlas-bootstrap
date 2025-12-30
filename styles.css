@@ -157,77 +157,138 @@
 }
 
 /* ===== MODAL STYLES ===== */
+/* Bootstrap modal overrides for joke ads */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed;
-    z-index: 500;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+    z-index: 1055; /* High z-index to appear above everything */
 }
 
 .modal-content {
-    background-color: white;
-    margin: 15% auto;
-    padding: 20px;
     border-radius: 10px;
-    width: 50%;
-    text-align: center;
+    border: 3px solid #2a2a2a;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
 }
 
-.close-btn {
-    color: black;
-    float: right;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-.email-input {
-    width: 80%;
-    padding: 10px;
-    margin: 10px 0;
-}
-
-.subscribe-btn {
-    padding: 10px 20px;
+.modal-header {
     background-color: #2a2a2a;
     color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    border-bottom: 2px solid #656e78;
 }
 
-.subscribe-btn:hover {
+.modal-title {
+    font-weight: bold;
+}
+
+.modal-body img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.modal-footer {
+    border-top: 1px solid #dee2e6;
+}
+
+.modal-footer .btn-primary,
+.modal-footer .btn-dark {
+    background-color: #2a2a2a;
+    border-color: #2a2a2a;
+    color: white;
+}
+
+.modal-footer .btn-primary:hover,
+.modal-footer .btn-dark:hover {
     background-color: #656e78;
+    border-color: #656e78;
+}
+
+.modal-footer .btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.modal-footer .btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #5a6268;
+}
+
+/* Input group button styling */
+.input-group .btn-dark {
+    background-color: #2a2a2a;
+    border-color: #2a2a2a;
+    color: white;
+}
+
+.input-group .btn-dark:hover {
+    background-color: #656e78;
+    border-color: #656e78;
 }
 
 /* ===== SIDE MODAL STYLES ===== */
-.side-modal {
+/* Right-side modal that slides in from the right */
+.modal-dialog-side {
 	position: fixed;
 	top: 0;
-	right: -100%; /* Start off-screen */
-	width: 300px;
+	right: 0;
+	width: 400px;
+	max-width: 90vw;
+	height: 100vh;
+	margin: 0;
+	transform: translateX(100%);
+	transition: transform 0.3s ease-out;
+}
+
+.modal.show .modal-dialog-side {
+	transform: translateX(0);
+}
+
+.modal-dialog-side .modal-content {
 	height: 100%;
-	background-color: white;
-	box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
-	z-index: 1000;
-	transition: right 0.5s ease; /* Smooth slide-in effect */
+	border-radius: 0;
+	border: none;
+	border-left: 3px solid #2a2a2a;
+	display: flex;
+	flex-direction: column;
+	box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
 }
 
-.side-modal-content {
-	padding: 20px;
-	text-align: center;
+.modal-dialog-side .modal-body {
+	overflow-y: auto;
+	flex: 1;
+	padding: 1rem;
 }
 
-.close-btn-side {
-	position: absolute;
-	top: 10px;
-	left: 10px;
-	font-size: 24px;
-	cursor: pointer;
+.modal-dialog-side .modal-body img {
+	max-width: 100%;
+	height: auto;
+	border-radius: 5px;
+	margin-bottom: 0.5rem;
+}
+
+.modal-dialog-side .modal-header {
+	border-radius: 0;
+}
+
+.modal-dialog-side .modal-footer {
+	border-radius: 0;
+}
+
+/* Animation for side modal - Bootstrap fade compatibility */
+.modal.fade .modal-dialog-side {
+	transform: translateX(100%);
+	transition: transform 0.3s ease-out;
+}
+
+.modal.fade.show .modal-dialog-side,
+.modal.show .modal-dialog-side {
+	transform: translateX(0);
+}
+
+/* Responsive adjustments for side modal */
+@media (max-width: 576px) {
+	.modal-dialog-side {
+		width: 100vw;
+		max-width: 100vw;
+	}
 }
 
 /* ===== RESPONSIVE DESIGN ===== */

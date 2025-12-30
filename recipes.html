@@ -556,5 +556,186 @@
 
 	<!-- Bootstrap JavaScript Bundle -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Joke Ad Modals -->
+	<!-- Modal 1: Subscribe to Chef Tristian -->
+	<div class="modal fade" id="subscribeModal1" tabindex="-1" aria-labelledby="subscribeModal1Label" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header bg-dark text-light">
+					<h5 class="modal-title" id="subscribeModal1Label">Subscribe to Chef Tristian!</h5>
+					<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body text-center">
+					<img src="images/cheftristian.webp" class="img-fluid mb-3 rounded-circle" style="max-width: 200px;" alt="Chef Tristian">
+					<h4 class="mb-3">Never Miss a Recipe!</h4>
+					<p>Join thousands of home cooks who get Chef Tristian's latest recipes delivered straight to their inbox. Get exclusive access to pro tips, cooking hacks, and more!</p>
+					<div class="input-group mb-3">
+						<input type="email" class="form-control" placeholder="Enter your email address" aria-label="Email">
+						<button class="btn btn-dark" type="button">Subscribe Now!</button>
+					</div>
+					<p class="text-muted small">By subscribing, you agree to receive weekly recipe emails and occasional promotional content.</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Maybe Later</button>
+					<button type="button" class="btn btn-dark" data-bs-dismiss="modal">Subscribe!</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal 2: Side Modal - What You're Missing -->
+	<div class="modal fade" id="sideModal2" tabindex="-1" aria-labelledby="sideModal2Label" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+		<div class="modal-dialog modal-dialog-side">
+			<div class="modal-content">
+				<div class="modal-header bg-dark text-light">
+					<h5 class="modal-title" id="sideModal2Label">What You're Missing Out On!</h5>
+					<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<p class="fw-bold mb-3">Without a subscription, you're missing exclusive access to:</p>
+					<div class="row g-3 mb-3">
+						<div class="col-12">
+							<img src="images/salmon-ramen-best-closeup.jpg" class="img-fluid rounded mb-2" alt="Salmon Ramen">
+							<p class="small mb-0"><strong>Premium Recipe Variations</strong></p>
+						</div>
+						<div class="col-12">
+							<img src="images/breakfast-dawgs-closeup.jpg" class="img-fluid rounded mb-2" alt="Breakfast Dawgs">
+							<p class="small mb-0"><strong>Secret Cooking Techniques</strong></p>
+						</div>
+						<div class="col-12">
+							<img src="images/salmon-sandwich-closeup.jpg" class="img-fluid rounded mb-2" alt="Salmon Sandwich">
+							<p class="small mb-0"><strong>Advanced Pro Tips</strong></p>
+						</div>
+						<div class="col-12">
+							<img src="images/bean-chili-closeup.jpg" class="img-fluid rounded mb-2" alt="Island Oasis">
+							<p class="small mb-0"><strong>Exclusive Recipe Cards</strong></p>
+						</div>
+					</div>
+					<p class="text-danger fw-bold">Don't let these amazing dishes pass you by! Subscribe now!</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">I'll Pass</button>
+					<button type="button" class="btn btn-dark" data-bs-dismiss="modal">Sign Me Up!</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal 3: Desperate Plea -->
+	<div class="modal fade" id="desperateModal3" tabindex="-1" aria-labelledby="desperateModal3Label" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header bg-dark text-light">
+					<h5 class="modal-title" id="desperateModal3Label">Please Just Sign Up!</h5>
+					<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body text-center">
+					<h4 class="mb-3">I'm Begging You at This Point!</h4>
+					<p class="lead">I know you just want to find that recipe you were looking for.</p>
+					<p>But isn't it way more fun to get all these unwanted ads? It's great!</p>
+					<p class="text-muted">I just want to cook a meal!</p>
+					<div class="alert alert-warning mt-3">
+						<strong>Seriously though...</strong> Just subscribe. It makes the ads stop. Well, maybe. Probably not. But you'll get recipes!
+					</div>
+					<div class="input-group mb-3">
+						<input type="email" class="form-control" placeholder="Your email (please?)" aria-label="Email">
+						<button class="btn btn-dark" type="button">Fine, I'll Subscribe</button>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Still No</button>
+					<button type="button" class="btn btn-dark" data-bs-dismiss="modal">Okay Fine!</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- JavaScript for Periodic Ad Modals -->
+	<script>
+		// Array of modal IDs in order
+		const adModals = ['subscribeModal1', 'sideModal2', 'desperateModal3'];
+		let currentModalIndex = 0;
+		let lastScrollPosition = 0;
+		let scrollDistance = 0;
+		let lastModalTime = 0;
+		let modalsShown = 0;
+		const maxModals = 3; // Maximum number of modals to show per session
+
+		// Track scroll position and show modals periodically
+		let scrollTimeout;
+		window.addEventListener('scroll', function() {
+			clearTimeout(scrollTimeout);
+			
+			scrollTimeout = setTimeout(function() {
+				const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+				const scrollDelta = Math.abs(currentScroll - lastScrollPosition);
+				scrollDistance += scrollDelta;
+				lastScrollPosition = currentScroll;
+
+				// Show modal after scrolling a certain distance (e.g., every 1000px)
+				if (scrollDistance >= 1000 && modalsShown < maxModals) {
+					const timeSinceLastModal = Date.now() - lastModalTime;
+					// Only show if at least 15 seconds have passed since last modal
+					if (timeSinceLastModal >= 15000) {
+						showNextModal();
+						scrollDistance = 0; // Reset scroll distance
+					}
+				}
+			}, 100);
+		});
+
+		// Also show modals based on time intervals (annoying!)
+		let timeInterval = setInterval(function() {
+			if (modalsShown < maxModals) {
+				const timeSinceLastModal = Date.now() - lastModalTime;
+				// Show a modal every 25-35 seconds if user is on page
+				if (timeSinceLastModal >= 25000 && document.visibilityState === 'visible') {
+					showNextModal();
+				}
+			} else {
+				clearInterval(timeInterval);
+			}
+		}, 5000); // Check every 5 seconds
+
+		// Show the next modal in sequence
+		function showNextModal() {
+			if (modalsShown >= maxModals) return;
+
+			const modalId = adModals[currentModalIndex];
+			const modalElement = document.getElementById(modalId);
+			
+			if (modalElement) {
+				const modal = new bootstrap.Modal(modalElement);
+				modal.show();
+				
+				// Update tracking variables
+				currentModalIndex = (currentModalIndex + 1) % adModals.length;
+				lastModalTime = Date.now();
+				modalsShown++;
+			}
+		}
+
+		// Show first modal after page loads (after a short delay)
+		window.addEventListener('load', function() {
+			setTimeout(function() {
+				if (modalsShown < maxModals) {
+					showNextModal();
+				}
+			}, 4000); // Show first modal 4 seconds after page load
+		});
+
+		// Reset modal count if user navigates away and comes back
+		document.addEventListener('visibilitychange', function() {
+			if (document.visibilityState === 'hidden') {
+				// Reset after being away for a while
+				setTimeout(function() {
+					if (document.visibilityState === 'visible') {
+						modalsShown = Math.max(0, modalsShown - 1); // Allow one more modal
+					}
+				}, 60000); // After 1 minute
+			}
+		});
+	</script>
 </body>
 </html>
